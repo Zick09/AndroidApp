@@ -1,0 +1,129 @@
+package com.example.secondapp;
+
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.speech.tts.TextToSpeech;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.Locale;
+
+
+
+public class MainActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+    private Button mSpeakButton;
+    private Button mStopButton;
+    private TextView enText;
+    private TextView ruText;
+
+
+    private TextToSpeech mTextToSpeech;
+    private boolean mIsInit;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        enText = findViewById(R.id.enText);
+        ruText = findViewById(R.id.ruText);
+        mSpeakButton = findViewById(R.id.buttonSpeak);
+        mStopButton = findViewById(R.id.buttonStop);
+        mTextToSpeech = new TextToSpeech(this, this);
+        mStopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int a = view.getId();
+            }
+        });
+        mSpeakButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Locale localeRu = new Locale("ru");
+                Locale localeEn = new Locale("en");
+                Dictionary<String, String[]> dict = new Hashtable<>();
+                dict.put("en",new String[]
+
+                    {
+                        "Furthermore", "Pursuit", "Last", "Rarely", "Although", "Strictly", "Outfit", "Tissue", "Mention", "Strict", "Harbor",
+                                "Starring", "Noble", "Glory", "Reign", "Eternity", "Compose", "Circumstances", "Independent", "Entity", "Occurs", "Achivable", "Pageant", "Prosecution",
+                                "Hut", "Cunt", "Solid", "Spread", "Wrecked", "Stumble", "Ownership", "Particulary", "Therefore", "Specify", "Invasion", "Infiltration", "Proposing",
+                                "Rumors", "Envy", "Bounderies", "Seporate", "injection", "gratitude", "gratful", "ungrateful", "Rather", "Gizmo", "Apperantly", "selfish", "Reveal",
+                                "Enhanced", "Contempt", "Torment", "Hardships", "Vain", "Encounters", "Besmirch", "Boilerplate", "Condoles", "Symphaty", "shove", "climaxed", "snapped off",
+                                "ashes", "nod", "tongue", "disctract", "Chart", "Despise", "Displase", "arrogant", "Reliable", "coincidence", "Рrime", "Nasty", "Endangerment", "Deliberate",
+                                "Endure", "Infatuation", "Encourage", "Contribute", "Convoluted", "Consistensy", "Pace", "Tucked", "Obtain", "Spank", "Upstanding", "Congenial",
+                                "Intentionally", "Hints", "Tempting", "Indulgences", "Restrain", "Expose", "Excesiary", "Exclude", "Enclose", "Insulate",
+                                "if you're attached to that hand", "infant", "rose from the dead", "gotta stay put", "intended", "rebel", "cut the shit",
+                                "petulant", "needless to say", "smirk", "whinge", "moan", "sincerity", "raped", "tagged", "terminated", "Insult", "Fluff", "To fluff", "Vow", "Be adviced",
+                                "Tweaks", "Effort", "Faintest idea", "Narrow", "Consent", "Lean on", "Diabolically", "Suit yourself", "Load of Bollocks", "Inocent", "Coup", "Hopitable",
+                                "Stinks", "Interaction", "Eventually", "Provoking", "Playthrough", "Standpoint", "Reevaluate", "About to be"
+                    });
+                dict.put("ru",new String[]
+
+                    {
+                        "более того", "преследование", "длится, последний", "редко", "хотя", "строго", "наряд, одежда", "салфетка",
+                                "упомянуть", "строгий", "гавань", "в главной роли", "благородный", "слава", "слава", "вечность", "сочинить", "обстоятельства", "независимый", "сущность",
+                                "происходит", "достижимо", "конкурс", "судебное преследование", "хижина", "пизда", "твердый, сплошной", "скатерть, покрывало", "разбитый, потерпевший",
+                                "споткнулся", "владение", "особенно", "поэтому", "указывать", "вторжение", "проникновение", "предлогая", "слухи", "Завидовать", "границы", "разделение",
+                                "Инъекция", "благодарность", "благодарный", "неблагодарный", "скорее", "штуковина", "видимо", "эгоистичный", "раскрывать", "увеличить, улучшить",
+                                "презрение", "мучить", "трудности", "напрасный", "сталкиваться", "осквернять, опозорить", "шаблон", "соболезнования", "сочуствие", "засуну",
+                                "достигло кульминации", "отломился", "пепел", "кивок", "язык", "отвлекать", "диаграмма, график", "презирать", "перемещение", "высовкомерный", "надежный",
+                                "совпадение", "основной", "противный", "угроза", "преднамеренный", "терпеть", "увлечение", "поощрять", "способствовать, внести вклад", "запутанный",
+                                "последовательность", "темп, шаг", "заправленный, поджатый", "получить", "шлепать", "порядочный", "благоприятный, близкий по духу", "намеренно",
+                                "намеки", "заманчиво", "снисхождение, поблажки, ", "сдерживать", "разоблачать", "чрезмерный", "исключение", "ограждение", "изоляция",
+                                "если ты привязан к этой руке", "младенец", "воскрес из мертвых", "должен оставаться на месте", "намеревался", "мятежник", "прекрати это дерьмо",
+                                "раздражительный", "разумеется, не нужно говорить", "ухмылка", "скулить, ныть", "стон", "искренность", "изнасиловал", "отмеченный", "прекращено",
+                                "оскорблять", "пух", "взбивать", "клятва", "иметь ввиду", "настройки", "усилие", "слабая идея", "узкий", "согласие", "опереться", "дьявольщина",
+                                "устраивайся", "чушь", "невиновный", "переворот", "гостеприимный", "воняет", "взаимодействие", "в конце концов", "провоцирующий", "прохождение игры",
+                                "точка зрения", "переоценить (повторно)", "собираюсь быть"
+                    });
+
+                if(mIsInit)
+
+                    {
+                        for (int i = 0; i < dict.get("en").length; i++) {
+
+                            mTextToSpeech.setLanguage(localeEn);
+                            mTextToSpeech.speak(dict.get("en")[i], TextToSpeech.QUEUE_FLUSH, null, null);
+                            try {
+                                Thread.sleep(2500);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            mTextToSpeech.setLanguage(localeRu);
+                            mTextToSpeech.speak(dict.get("ru")[i], TextToSpeech.QUEUE_FLUSH, null, null);
+                            try {
+                                Thread.sleep(2500);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+            }
+        });
+
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            Locale localeRu = new Locale("ru");
+            Locale localeEn = new Locale("en");
+            int resultRu = mTextToSpeech.setLanguage(localeRu);
+            int resultEn = mTextToSpeech.setLanguage(localeEn);
+            if (resultRu == TextToSpeech.LANG_MISSING_DATA || resultRu == TextToSpeech.LANG_NOT_SUPPORTED) {
+                mIsInit = false;
+            } else if  (resultEn == TextToSpeech.LANG_MISSING_DATA || resultEn == TextToSpeech.LANG_NOT_SUPPORTED){
+                mIsInit = false;
+            } else {
+                mIsInit = true;
+            }
+        } else {
+            mIsInit = false;
+        }
+    }
+}
