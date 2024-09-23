@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private TextView enText;
     private TextView ruText;
 
-
     private TextToSpeech mTextToSpeech;
     private boolean mIsInit;
 
@@ -83,30 +82,15 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
                     });
 
                 if(mIsInit)
-
                     {
-                        for (int i = 0; i < dict.get("en").length; i++) {
-
-                            mTextToSpeech.setLanguage(localeEn);
-                            mTextToSpeech.speak(dict.get("en")[i], TextToSpeech.QUEUE_FLUSH, null, null);
-                            try {
-                                Thread.sleep(2500);
-                            } catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-                            mTextToSpeech.setLanguage(localeRu);
-                            mTextToSpeech.speak(dict.get("ru")[i], TextToSpeech.QUEUE_FLUSH, null, null);
-                            try {
-                                Thread.sleep(2500);
-                            } catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
+                        SpeakThread thread = new SpeakThread(dict, localeRu, localeEn, mTextToSpeech);
+                        thread.start();
                     }
             }
         });
 
     }
+
 
     @Override
     public void onInit(int status) {
@@ -127,3 +111,4 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         }
     }
 }
+
